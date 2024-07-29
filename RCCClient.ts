@@ -3,7 +3,7 @@ import { resolve } from 'path';
 import ScriptExecution from './ScriptExecution';
 import Job from './Job';
 
-const wsdl = resolve('@bloxrev/rccclient-node/RCCService.wsdl');
+const wsdl = resolve('./node_modules/@bloxrev/rccclient-node/RCCService.wsdl');
 
 class RCCClient {
     private url: string;

@@ -25,7 +25,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const soap = __importStar(require("soap"));
 const path_1 = require("path");
-const wsdl = (0, path_1.resolve)('@bloxrev/rccclient-node/RCCService.wsdl');
+const wsdl = (0, path_1.resolve)('./node_modules/@bloxrev/rccclient-node/RCCService.wsdl');
 class RCCClient {
     constructor(ip, port) {
         this.url = `http://${ip}:${port}`;
