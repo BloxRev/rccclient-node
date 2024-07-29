@@ -5,7 +5,7 @@ Please note that I got the WSDL for this project from BrentDaMage's said library
 ## Adding to a project
 Simply run the following command:
 ```
-npm i https://github.com/megahdrive/rccclient-node
+npm i https://github.com/bloxrev/rccclient-node
 ```
 ## Example
 ```js
