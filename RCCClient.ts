@@ -1,69 +1,96 @@
 import * as soap from 'soap';
-import Job from './Job'; // Assuming Job is defined in a separate file
+import { resolve } from 'path';
 
-const wsdl = require.resolve("@bloxrev/rccclient-node/RCCService.wsdl");
+const wsdl = resolve('@bloxrev/rccclient-node/RCCService.wsdl');
 
 class RCCClient {
-    url: string;
+    private url: string;
 
-    constructor(ip: string, port: number) {
+    constructor(ip: string, port: string) {
         this.url = `http://${ip}:${port}`;
     }
 
-    private callToService(sender: string, options: object, callback: (result: any) => void): void {
-        soap.createClient(wsdl, (err, client) => {
-            if (err) {
-                throw err;
-            }
+    private callToService(sender: string, options: object, callback: (result: any) => void) {
+        soap.createClient(wsdl, (err: any, client: any) => {
+            if (err) throw err;
             client.setEndpoint(this.url);
             client[sender](options, (error: any, result: any) => {
-                if (error) {
-                    throw error;
-                }
+                if (error) throw error;
                 callback(result);
             });
         });
     }
 
-    HelloWorld(callback: (result: any) => void): void {
-        this.callToService("HelloWorld", {}, callback);
+    public HelloWorld(callback: (result: any) => void) {
+        this.callToService('HelloWorld', {}, callback);
     }
 
-    GetVersion(callback: (result: any) => void): void {
-        this.callToService("GetVersion", {}, callback);
+    public GetVersion(callback: (result: any) => void) {
+        this.callToService('GetVersion', {}, callback);
     }
 
-    GetStatus(callback: (result: any) => void): void {
-        this.callToService("GetStatus", {}, callback);
+    public OpenJob(job: string, script: string | null, callback: (result: any) => void) {
+        this.OpenJobEx(job, script, callback);
     }
 
-    OpenJob(job: Job, script: string | null = null, callback: (result: any) => void): void {
-        const options = { job, script };
-        this.callToService("OpenJob", options, callback);
+    public OpenJobEx(job: string, script: string | null, callback: (result: any) => void) {
+        this.callToService('OpenJob', { job, script }, callback);
     }
 
-    CloseAllJobs(callback: (result: any) => void): void {
-        this.callToService("CloseAllJobs", {}, callback);
+    public BatchJob(job: string, script: string, callback: (result: any) => void) {
+        this.BatchJobEx(job, script, callback);
     }
 
-    Diag(callback: (result: any) => void): void {
-        this.callToService("Diag", {}, callback);
+    public BatchJobEx(job: string, script: string, callback: (result: any) => void) {
+        this.callToService('BatchJobEx', { job, script }, callback);
     }
 
-    DiagEx(callback: (result: any) => void): void {
-        this.callToService("DiagEx", {}, callback);
+    public RenewLease(jobID: string, expirationInSeconds: number, callback: (result: any) => void) {
+        this.callToService('RenewLease', { jobID, expirationInSeconds }, callback);
     }
 
-    GetAllJobs(callback: (result: any) => void): void {
-        this.callToService("GetAllJobs", {}, callback);
+    public Execute(jobID: string, script: string, callback: (result: any) => void) {
+        this.ExecuteEx(jobID, script, callback);
     }
 
-    GetAllJobsEx(callback: (result: any) => void): void {
-        this.callToService("GetAllJobsEx", {}, callback);
+    public ExecuteEx(jobID: string, script: string, callback: (result: any) => void) {
+        this.callToService('ExecuteEx', { jobID, script }, callback);
     }
 
-    CloseExpiredJobs(callback: (result: any) => void): void {
-        this.callToService("CloseExpiredJobs", {}, callback);
+    public CloseJob(jobID: string, callback: (result: any) => void) {
+        this.callToService('CloseJob', { jobID }, callback);
+    }
+
+    public GetExpiration(jobID: string, callback: (result: any) => void) {
+        this.callToService('GetExpiration', { jobID }, callback);
+    }
+
+    public Diag(type: string, jobID: string, callback: (result: any) => void) {
+        this.DiagEx(type, jobID, callback);
+    }
+
+    public DiagEx(type: string, jobID: string, callback: (result: any) => void) {
+        this.callToService('DiagEx', { type, jobID }, callback);
+    }
+
+    public GetStatus(callback: (result: any) => void) {
+        this.callToService('GetStatus', {}, callback);
+    }
+
+    public GetAllJobs(callback: (result: any) => void) {
+        this.GetAllJobsEx(callback);
+    }
+
+    public GetAllJobsEx(callback: (result: any) => void) {
+        this.callToService('GetAllJobsEx', {}, callback);
+    }
+
+    public CloseExpiredJobs(callback: (result: any) => void) {
+        this.callToService('CloseExpiredJobs', {}, callback);
+    }
+
+    public CloseAllJobs(callback: (result: any) => void) {
+        this.callToService('CloseAllJobs', {}, callback);
     }
 }
 
