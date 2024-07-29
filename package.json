@@ -1,5 +1,5 @@
 {
-  "name": "@megahdrive/rccclient-node",
+  "name": "@bloxrev/rccclient-node",
   "version": "1.0.0",
   "description": "A node.js library to interact with RCCService over SOAP",
   "main": "RCCClient.js",
