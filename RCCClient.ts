@@ -1,5 +1,7 @@
 import * as soap from 'soap';
 import { resolve } from 'path';
+import ScriptExecution from './ScriptExecution';
+import Job from './Job';
 
 const wsdl = resolve('@bloxrev/rccclient-node/RCCService.wsdl');
 
@@ -29,19 +31,19 @@ class RCCClient {
         this.callToService('GetVersion', {}, callback);
     }
 
-    public OpenJob(job: string, script: string | null, callback: (result: any) => void) {
+    public OpenJob(job: Job, script: ScriptExecution, callback: (result: any) => void) {
         this.OpenJobEx(job, script, callback);
     }
 
-    public OpenJobEx(job: string, script: string | null, callback: (result: any) => void) {
+    public OpenJobEx(job: Job, script: ScriptExecution, callback: (result: any) => void) {
         this.callToService('OpenJob', { job, script }, callback);
     }
 
-    public BatchJob(job: string, script: string, callback: (result: any) => void) {
+    public BatchJob(job: Job, script: ScriptExecution, callback: (result: any) => void) {
         this.BatchJobEx(job, script, callback);
     }
 
-    public BatchJobEx(job: string, script: string, callback: (result: any) => void) {
+    public BatchJobEx(job: Job, script: ScriptExecution, callback: (result: any) => void) {
         this.callToService('BatchJobEx', { job, script }, callback);
     }
 
@@ -49,11 +51,11 @@ class RCCClient {
         this.callToService('RenewLease', { jobID, expirationInSeconds }, callback);
     }
 
-    public Execute(jobID: string, script: string, callback: (result: any) => void) {
+    public Execute(jobID: string, script: ScriptExecution, callback: (result: any) => void) {
         this.ExecuteEx(jobID, script, callback);
     }
 
-    public ExecuteEx(jobID: string, script: string, callback: (result: any) => void) {
+    public ExecuteEx(jobID: string, script: ScriptExecution, callback: (result: any) => void) {
         this.callToService('ExecuteEx', { jobID, script }, callback);
     }
 
