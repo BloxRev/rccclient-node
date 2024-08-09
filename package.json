@@ -20,7 +20,7 @@
     "soap": "^1.0.0"
   },
   "publishConfig": {
-    "@megahdrive:registry": "https://npm.pkg.github.com"
+    "@bloxrev:registry": "https://npm.pkg.github.com"
   },
   "devDependencies": {
     "@types/node": "^22.0.0"
