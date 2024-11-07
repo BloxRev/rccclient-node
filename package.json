@@ -1,6 +1,6 @@
 {
   "name": "@bloxrev/rccclient-node",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A node.js library to interact with RCCService over SOAP",
   "main": "dist/RCCClient.js",
   "scripts": {
