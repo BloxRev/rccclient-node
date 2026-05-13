@@ -1,10 +1,11 @@
 {
   "name": "@bloxrev/rccclient-node",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A node.js library to interact with RCCService over SOAP",
-  "main": "RCCClient.js",
+  "main": "dist/RCCClient.js",
   "scripts": {
-    "test": "node RCCClient.js"
+    "test": "node RCCClient.js",
+    "prepublish": "tsc"
   },
   "keywords": [
     "roblox",
@@ -20,7 +21,7 @@
     "soap": "^1.0.0"
   },
   "publishConfig": {
-    "@megahdrive:registry": "https://npm.pkg.github.com"
+    "@bloxrev:registry": "https://npm.pkg.github.com"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
